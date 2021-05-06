@@ -1,48 +1,35 @@
-/* BUTTONS */
+let count = 0
 
-btnDecrease = document.getElementById("decrease");
-btnDecrease.addEventListener("click",decrease)
+let countTag = document.querySelector("#number")
+let btns = document.querySelectorAll(".btn")
 
-btnIncrease = document.getElementById("increase");
-btnIncrease.addEventListener("click",increase)
+btns.forEach(activeBtn)
+    
+function activeBtn(btn) { 
+    
+    btn.addEventListener("click", function(element){
+    let val = element.currentTarget.classList
+    if(val.contains("decrease")){
+        count --
+    } else if( val.contains("increase")){
+        count++
+    } else if( val.contains("reset")){
+        count = 0
+    }
 
-btnReset = document.getElementById("reset")
-btnReset.addEventListener("click",reset)
+    color()
 
+    countTag.textContent = count
+})
+}
 
-/* FUNCTION */
-
-let number = document.getElementById("number")
-let i = 0
-let zero = 0
-
-function decrease(){
-    i --
-    number.innerText= i
-    if(i<0){
-        number.style.color= "red"
-    }else if(i>0){
-        number.style.color= "green"
+function color(){
+    if(count > 0){
+        countTag.style.color = "green"
+    }else if( count < 0){
+        countTag.style.color = "red"
     }else{
-        number.style.color="black"
+        countTag.style.color = "#222"
     }
 }
-
-function increase(){
-    i ++
-    number.innerText = i
-    if(i<0){
-        number.style.color= "red"
-    }else if(i>0){
-        number.style.color= "green"
-    }else{
-        number.style.color="black"
-    }
-}
-
-function reset(){
-    i = 0
-    number.innerText = i
-    number.style.color="black"
-
-}
+    
